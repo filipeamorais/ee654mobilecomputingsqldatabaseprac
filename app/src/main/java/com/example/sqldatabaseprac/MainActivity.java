@@ -24,6 +24,7 @@ public class MainActivity extends AppCompatActivity {
         dbh.addFriend(new Friend(
                 0, "Bob", "Johnson", "bob@uab.edu"));
     }
+
     void showRecords(View v) {
         List<Friend> friends = dbh.getAllFriends();
         String str = "";
@@ -35,6 +36,7 @@ public class MainActivity extends AppCompatActivity {
         }
         textV.setText(str);
     }
+
     void deleteRecords(View v) {
         textV.setText("");
         dbh.clearDatabase();

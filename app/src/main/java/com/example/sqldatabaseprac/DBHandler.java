@@ -21,6 +21,7 @@ public class DBHandler extends SQLiteOpenHelper {
     public DBHandler(Context context) {
         super(context, DB_NAME, null, DB_VERSION);
     }
+
     @Override
     public void onCreate(SQLiteDatabase db) {
         String createTableString ="CREATE TABLE "
@@ -30,6 +31,7 @@ public class DBHandler extends SQLiteOpenHelper {
                 + " TEXT,"+ KEY_EMAIL + " TEXT" + ")";
         db.execSQL(createTableString);
     }
+
     @Override
     public void onUpgrade(SQLiteDatabase db,
                           int oldVer, int newVer) {
@@ -37,9 +39,11 @@ public class DBHandler extends SQLiteOpenHelper {
                 + TABLE_FRIENDS);
         onCreate(db);
     }
+
     void clearDatabase() {
         onUpgrade(this.getWritableDatabase(),0,0);
     }
+
     void addFriend(Friend friend) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
@@ -49,6 +53,7 @@ public class DBHandler extends SQLiteOpenHelper {
         db.insert(TABLE_FRIENDS, null, values);
         db.close();
     }
+
     Friend getFriend(int id) {
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.query(
@@ -64,6 +69,7 @@ public class DBHandler extends SQLiteOpenHelper {
                 cursor.getString(3));
         return friend;
     }
+
     public List<Friend> getAllFriends() {
         List<Friend> friendList = new ArrayList<Friend>();
         String selectQuery = "SELECT  * FROM "+TABLE_FRIENDS;
@@ -81,6 +87,7 @@ public class DBHandler extends SQLiteOpenHelper {
         }
         return friendList;
     }
+
     public int updateContact(Friend friend) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
@@ -91,6 +98,7 @@ public class DBHandler extends SQLiteOpenHelper {
                 KEY_ID + " = ?", new String[] {
                         String.valueOf(friend.getId()) });
     }
+
     public void deleteContact(Friend friend) {
         SQLiteDatabase db = this.getWritableDatabase();
         db.delete(TABLE_FRIENDS, KEY_ID + " = ?",
