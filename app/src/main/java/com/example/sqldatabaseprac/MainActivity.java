@@ -25,7 +25,7 @@ public class MainActivity extends AppCompatActivity {
                 0, "Bob", "Johnson", "bob@uab.edu"));
     }
 
-    void showRecords(View v) {
+    public void showRecords(View v) {
         List<Friend> friends = dbh.getAllFriends();
         String str = "";
         for (Friend f : friends) {
@@ -37,7 +37,7 @@ public class MainActivity extends AppCompatActivity {
         textV.setText(str);
     }
 
-    void deleteRecords(View v) {
+    public void deleteRecords(View v) {
         textV.setText("");
         dbh.clearDatabase();
     }
